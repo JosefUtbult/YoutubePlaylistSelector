@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <title>Youtube Playlist Selector</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/youtubeplayer.css') }}">
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/player.js') }}"></script>
+</head>
+
+<body class="light">
+    <div class="container">
+        <div class="row">
+            <div class="six columns">
+                <h1>Youtube Playlist Selector</h1>
+            </div>
+            <div class="six columns">
+                <label class="switch">
+                    <input type="checkbox" onclick="toggleLightDarkMode(this)" {% if darkmode %}checked{% endif %}>
+                    <span class="slider"></span>
+                </label>
+
+                <button class="button">Settings</button>
+            </div>
+        </div>
+        <div class="row">
+            <div id="selectionButtons" class="row container button-container"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="playercontainer">
+            <div id="player" style="opacity: 0;"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="flexbox-spread">
+            <div>
+                <p><i>Youtube Playlist Selector</i> by Josef Utbult</p>
+                <p><a href="#">Project Repository</a></p>
+            </div>
+        </div>
+    </footer> 
+</body>
+
+</html>
