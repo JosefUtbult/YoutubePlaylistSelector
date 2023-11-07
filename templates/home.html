@@ -14,38 +14,30 @@
 </head>
 
 <body class="light">
-    <div class="container">
-        <div class="row">
-            <div class="six columns">
-                <h1>Youtube Playlist Selector</h1>
-            </div>
-            <div class="six columns">
-                <label class="switch">
-                    <input type="checkbox" onclick="toggleLightDarkMode(this)" {% if darkmode %}checked{% endif %}>
-                    <span class="slider"></span>
-                </label>
-
-                <button class="button">Settings</button>
-            </div>
+    <div class="flexbox-spread header">
+        <div>
+            <h1>Youtube Playlist Selector</h1>
         </div>
-        <div class="row">
-            <div id="selectionButtons" class="row container button-container"></div>
+        <div class="right-menu">
+            <label class="switch">
+                <input type="checkbox" onclick="toggleLightDarkMode(this)" {% if darkmode %}checked{% endif %}>
+                <span class="slider"></span>
+            </label>
+            <button class="button">Settings</button>
         </div>
     </div>
-    <div class="row">
-        <div id="playercontainer">
-            <div id="player" style="opacity: 0;"></div>
-        </div>
-    </div>
-
-    <footer>
-        <div class="flexbox-spread">
-            <div>
+    <div class="content-container">
+        <div id="selectionButtons" class="container row button-container center"></div>
+        <div class="row">
+            <div class="footer">
                 <p><i>Youtube Playlist Selector</i> by Josef Utbult</p>
                 <p><a href="#">Project Repository</a></p>
+            </div> 
+            <div id="playercontainer">
+                <div id="player" style="opacity: 0;"></div>
             </div>
         </div>
-    </footer> 
+    </div>
 </body>
 
 </html>

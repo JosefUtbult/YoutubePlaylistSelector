@@ -6,7 +6,55 @@ let playlists = [
     {
         title: "CoC: Horror",
         id: 'PLuu9kZA0CNfPjXkT4BWCSV2tKJOhhe2oS'
-    }
+    },
+    {
+        title: "CoC: Mystery 1",
+        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
+    },
+    {
+        title: "CoC: Mystery2",
+        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
+    },
+    {
+        title: "CoC: Mystery3",
+        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
+    },
+    {
+        title: "CoC: Mystery4",
+        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
+    },
+    {
+        title: "CoC: Mystery5",
+        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
+    },
+    {
+        title: "CoC: Mystery6",
+        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
+    },
+    {
+        title: "CoC: Mystery7",
+        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
+    },
+    {
+        title: "CoC: Mystery8",
+        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
+    },
+    {
+        title: "CoC: Mystery9",
+        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
+    },
+    {
+        title: "CoC: Mystery10",
+        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
+    },
+    {
+        title: "CoC: Mystery11",
+        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
+    },
+    {
+        title: "CoC: Mystery12",
+        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
+    },
 ];
 
 const RATE = 3000;
@@ -179,8 +227,10 @@ function setupMenu() {
         button.innerHTML = element.title;
         button.setAttribute('playlistid', element.id);
         button.setAttribute('title', element.title);
+        button.classList.add('button');
         button.classList.add('playlist-button');
         button.onclick = function () { changeVideo(this) }
+
         el.appendChild(button);
     });
 
