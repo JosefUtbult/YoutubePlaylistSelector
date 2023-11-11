@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/youtubeplayer.css') }}">
     <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <script src="{{ url_for('static', filename='js/player.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cookies.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/setup.js') }}"></script>
 </head>
 
 <body class="light">
@@ -20,10 +22,17 @@
         </div>
         <div class="right-menu">
             <label class="switch">
-                <input type="checkbox" onclick="toggleLightDarkMode(this)" {% if darkmode %}checked{% endif %}>
+                <input type="checkbox" onclick="toggleLightDarkMode(this)">
                 <span class="slider"></span>
             </label>
-            <button class="button">Settings</button>
+
+            <form action="">
+                <label for="settings-input" class="button">
+                    Import
+                    <input type="file" id="settings-input" name="settings" onchange="setCookie()"></input>
+                </label>
+                <!-- <input class="button" type="button" onclick="setCookie()" value="Apply"></input> -->
+            </form>
         </div>
     </div>
     <div class="content-container">
@@ -31,7 +40,7 @@
         <div class="row">
             <div class="footer">
                 <p><i>Youtube Playlist Selector</i> by Josef Utbult</p>
-                <p><a href="#">Project Repository</a></p>
+                <p><a href="https://github.com/JosefUtbult/YoutubePlaylistSelector">Project Repository</a></p>
             </div> 
             <div id="playercontainer">
                 <div id="player" style="opacity: 0;"></div>

@@ -1,68 +1,11 @@
-let playlists = [
-    {
-        title: "CoC: Mystery",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-    {
-        title: "CoC: Horror",
-        id: 'PLuu9kZA0CNfPjXkT4BWCSV2tKJOhhe2oS'
-    },
-    {
-        title: "CoC: Mystery 1",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-    {
-        title: "CoC: Mystery2",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-    {
-        title: "CoC: Mystery3",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-    {
-        title: "CoC: Mystery4",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-    {
-        title: "CoC: Mystery5",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-    {
-        title: "CoC: Mystery6",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-    {
-        title: "CoC: Mystery7",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-    {
-        title: "CoC: Mystery8",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-    {
-        title: "CoC: Mystery9",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-    {
-        title: "CoC: Mystery10",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-    {
-        title: "CoC: Mystery11",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-    {
-        title: "CoC: Mystery12",
-        id: 'PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm'
-    },
-];
-
 const RATE = 3000;
 
 let player;
-let skip = false;
+let skip = true;
 let lock = false;
-let storedVolume = 0;
+let storedVolume = undefined;
+let storedButton;
+let playbackStatus = 0;
 
 // BUFFERING: 3
 // CUED: 5
@@ -70,8 +13,6 @@ let storedVolume = 0;
 // PAUSED: 2
 // PLAYING: 1
 // UNSTARTED: -1
-
-let playbackStatus = 0;
 
 // Youtube stuff
 function setupYoutube() {
@@ -82,46 +23,58 @@ function setupYoutube() {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
 
+// Setup youtube playlist with an incorrect playlist ID at start
+const initialSetup = {
+    listType: 'playlist',
+    list: 'not-applicable',
+    index: parseInt(0),
+    suggestedQuality: 'small'
+}
+
 function onYouTubePlayerAPIReady() {
     player = new YT.Player('player', {
         height: '100%',
         width: '100%',
-        loadPlaylist: {
-            listType: 'playlist',
-            list: playlists[0].id,
-            index: parseInt(0),
-            suggestedQuality: 'small'
-        },
+        loadPlaylist: initialSetup,
         events: {
-            'onReady': onPlayerReady,
+            'onReady': (event) => {event.target.loadPlaylist(initialSetup)},
             'onStateChange': onPlayerStateChange
         }
     });
-
-    console.log(YT.PlayerState)
-}
-function onPlayerReady(event) {
-    event.target.loadPlaylist({
-        listType: 'playlist',
-        list: playlists[0].id,
-        index: parseInt(0),
-        suggestedQuality: 'small',
-    });
 }
 
-function onPlayerStateChange(event) {
-    // console.log(`State change. Event: ${event.data}`)
+async function onPlayerStateChange(event) {
+    console.log(`State change. Event: ${Object.keys(YT.PlayerState).find(key => YT.PlayerState[key] === event.data)}`);
+
+    if(storedVolume === undefined) {
+        // Store the first volume as the original one
+        console.log("Applying first volume")
+        storedVolume = event.target.getVolume()
+        event.target.setVolume(0);
+    }
+    
     playbackStatus = event.data;
-
-    if (event.data === YT.PlayerState.PLAYING && skip) {
+    if (event.data === YT.PlayerState.BUFFERING && skip) {
         console.log("Skip");
         player.setShuffle(true);
         player.setLoop(true);
         player.nextVideo();
-
+        
         // Set the opacity to 1 for the first time
         document.getElementById('player').style.opacity = 1;
         skip = false;
+    }
+    else if (event.data === YT.PlayerState.PLAYING) {
+        // Increase the volume back to the original
+        await increaseVolume();
+        if(storedButton) {
+            storedButton.classList.add('active');
+        }
+        lock = false;
+    }
+    // Unlock when a video has paused
+    else if (event.data === YT.PlayerState.PAUSED) {
+        lock = false;
     }
 }
 
@@ -145,16 +98,14 @@ async function decreaseVolume(originalVolume) {
     }
 }
 
-async function increaseVolume(originalVolume) {
-    if(originalVolume === 0) {
-        originalVolume = storedVolume;
-        console.log(`Playback paused. Changing to stored volume: ${storedVolume}`)
+async function increaseVolume() {
+    if(storedVolume) {
+        for (let i = 0; i <= storedVolume; i++) {
+            player.setVolume(i);
+            await delay(RATE / storedVolume);
+        }
+        console.log(`Increased volume back to ${storedVolume}`);
     }
-    for (let i = 0; i <= originalVolume; i++) {
-        player.setVolume(i);
-        await delay(RATE / originalVolume);
-    }
-    console.log(`Increased volume back to ${originalVolume}`);
 }
 
 // Activates when one of the playlist buttons is pressed
@@ -196,9 +147,8 @@ async function changeVideo(button) {
                 suggestedQuality: 'small'
             })
 
-            // Increase the volume back to the original
-            await increaseVolume(originalVolume);
-            button.classList.add('active');
+            // Store the current button for the event driven change to set as active
+            storedButton = button;
         }
         else {
             button.classList.remove('active');
@@ -211,18 +161,18 @@ async function changeVideo(button) {
             button.classList.remove('pre-active');
             button.setAttribute('state', 'false');
         }
-
-        lock = false;
     }
     else {
         console.log("Ignore input when loading lock is active");
     }
 }
 
-function setupMenu() {
+function setupMenu(settings) {
     let el = document.getElementById("selectionButtons");
+    el.innerHTML = '';
+
     // For each instance in the playlist, create a button
-    playlists.forEach(element => {
+    settings.playlists.forEach(element => {
         button = document.createElement('button');
         button.innerHTML = element.title;
         button.setAttribute('playlistid', element.id);
@@ -236,8 +186,7 @@ function setupMenu() {
 
 }
 
-window.onload = () => {
-
+function setupPlayer(settings) {
     setupYoutube();
-    setupMenu();
+    setupMenu(settings);
 }
