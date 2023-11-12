@@ -9,39 +9,105 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/youtubeplayer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/switch.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/playlistbutton.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+
     <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <script src="{{ url_for('static', filename='js/player.js') }}"></script>
     <script src="{{ url_for('static', filename='js/cookies.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
     <script src="{{ url_for('static', filename='js/setup.js') }}"></script>
+
+    <?php 
+    header('Access-Control-Allow-Origin: *');
+    header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+    header("Allow: GET, POST, OPTIONS, PUT, DELETE");
+    ?>
 </head>
 
-<body class="light">
+<body class="light instant">
+    <div id="settings-menu" style="opacity: 0; display: none;">
+    <!-- <div id="settings-menu"> -->
+        <button id="exit-button" onclick="closeSettings()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192
+                210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0
+                45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5
+                45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3
+                0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+            </svg>
+        </button>
+        <div class="container">
+            <div class="row">
+                <h4>Settings</h4>
+                <form onsubmit="return false">
+                    <div id="playlists-form">
+                    </div>
+                    <div class="row">
+                        <div class="two columns">
+                            <button id="add-button" onclick="addField()">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <label for="apply-settings" class="button settings-button">
+                            Apply settings
+                            <input type="submit" id="apply-settings" onclick="applySettings()">
+                        </label>
+                    </div>
+                    <div class="row">
+                        <a id="hiddenDownload" style="display: none;"></a>
+                        <div class="four columns">
+                            <label for="export-settings" class="button settings-button">
+                                Export Settings
+                                <input type="button" id="export-settings" onclick="exportSettings()">
+                            </label>
+                        </div>
+                        <div class="four columns">
+                            <label for="download-template" class="button settings-button">
+                                Download Template
+                                <input type="button" id="download-template" onclick="downloadTemplate()">
+                            </label>
+                        </div>
+                        <div class="four columns">
+                            <label for="settings-input" class="button settings-button">
+                                Import settings
+                                <input type="file" id="settings-input" name="settings" onchange="importSettings()"></input>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="flexbox-spread header">
         <div>
             <h1>Youtube Playlist Selector</h1>
         </div>
         <div class="right-menu">
             <label class="switch">
-                <input type="checkbox" onclick="toggleLightDarkMode(this)">
+                <input type="checkbox" id="theme-switch" onclick="toggleLightDarkMode(this)">
                 <span class="slider"></span>
             </label>
-
-            <form action="">
-                <label for="settings-input" class="button">
-                    Import
-                    <input type="file" id="settings-input" name="settings" onchange="setCookie()"></input>
-                </label>
-                <!-- <input class="button" type="button" onclick="setCookie()" value="Apply"></input> -->
-            </form>
+            <button class="button" onclick="openSettings()">Settings</button>
         </div>
     </div>
-    <div class="content-container">
+    <div class="content-container" onclick="closeSettings()">
         <div id="selectionButtons" class="container row button-container center"></div>
         <div class="row">
             <div class="footer">
                 <p><i>Youtube Playlist Selector</i> by Josef Utbult</p>
                 <p><a href="https://github.com/JosefUtbult/YoutubePlaylistSelector">Project Repository</a></p>
-            </div> 
+            </div>
             <div id="playercontainer">
                 <div id="player" style="opacity: 0;"></div>
             </div>

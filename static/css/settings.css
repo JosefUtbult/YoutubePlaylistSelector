@@ -1,0 +1,140 @@
+#settings-menu .row {
+    margin-top: 2vh;
+}
+
+#settings-menu {
+    position: absolute;
+    top: 10vh;
+    bottom: 10vh;
+    left: 10vw;
+    right: 10vw;
+    z-index: 2;
+    border-radius: 10px;
+    box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2), 0 9px 22px 0 rgba(0, 0, 0, 0.19);
+    display: inline-block;
+    padding: 2vh 10vw;
+    overflow-y: scroll;
+}
+
+body:not(.instant) #settings-menu {
+    transition: opacity ease-in-out 200ms,
+        background-color var(--color-transition),
+        color var(--color-transition);
+}
+
+body:not(.instant) #settings-menu label {
+    transition: color var(--color-transition);
+}
+
+#settings-menu > * {
+    position: relative;
+}
+
+#settings-menu h1,
+#settings-menu h2,
+#settings-menu h3,
+#settings-menu h4,
+#settings-menu h5,
+#settings-menu h6 {
+    text-align: center;
+}
+
+.light #settings-menu {
+    background-color: var(--background-light);
+    border-color: var(--text-light);
+}
+
+.dark #settings-menu {
+    background-color: var(--background-dark);
+    border-color: var(--text-dark);
+}
+
+#exit-button {
+    position: absolute;
+    right: 2vw;
+    width: 14px;
+    height: 21px;
+    padding: 0;
+    border: none;
+}
+
+#exit-button svg {
+    width: 100%;
+}
+
+body:not(.instant) #exit-button path {
+    transition: fill var(--color-transition);
+}
+
+.light #exit-button path {
+    fill: var(--text-light)
+}
+
+.dark #exit-button path {
+    fill: var(--text-dark)
+}
+
+#settings-menu form .row {
+    display: flex;
+    align-items: end;
+}
+
+.trash-button-container,
+#add-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.trash-button,
+#add-button {
+    border: none;
+}
+
+.trash-button svg,
+#add-button svg {
+    height: 100%;
+}
+
+.light .trash-button path,
+.light #add-button path {
+    fill: var(--text-light);
+}
+
+.dark .trash-button path,
+.dark #add-button path {
+    fill: var(--text-dark);
+}
+
+.trash-button path,
+#add-button path {
+    transition: fill 100ms ease-in-out;
+}
+
+.trash-button:hover path {
+    fill: red;
+}
+
+.light #add-button:hover path {
+    fill: var(--active-light-background)
+}
+
+.dark #add-button:hover path {
+    fill: var(--active-dark-background)
+}
+
+.settings-button {
+    width: 100%;
+}
+
+.settings-button > input {
+    display: none;
+}
+
+.light .settings-button[for="apply-settings"] {
+    background-color: var(--active-light-background);
+}
+
+.dark .settings-button[for="apply-settings"] {
+    background-color: var(--active-dark-background);
+}

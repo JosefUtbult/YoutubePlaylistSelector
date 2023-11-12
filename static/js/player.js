@@ -2,6 +2,7 @@ const RATE = 3000;
 
 let player;
 let skip = true;
+let rechangePlaylist = true;
 let lock = false;
 let storedVolume = undefined;
 let storedButton;
@@ -52,17 +53,35 @@ async function onPlayerStateChange(event) {
         storedVolume = event.target.getVolume()
         event.target.setVolume(0);
     }
-    
+   
     playbackStatus = event.data;
-    if (event.data === YT.PlayerState.BUFFERING && skip) {
-        console.log("Skip");
-        player.setShuffle(true);
-        player.setLoop(true);
-        player.nextVideo();
-        
-        // Set the opacity to 1 for the first time
-        document.getElementById('player').style.opacity = 1;
-        skip = false;
+    if (event.data === YT.PlayerState.BUFFERING) {
+        // The Youtube API is shit and won't change the playlist the first time for
+        // some reason. Therefore, change it once again and retry
+        if(rechangePlaylist) {
+            console.log("Force rechaning playlist")
+
+            await player.loadPlaylist({
+                listType: 'playlist',
+                list: storedButton.getAttribute('playlistid'),
+                index: parseInt(0),
+                suggestedQuality: 'small'
+            })
+            rechangePlaylist = false;
+            return;
+        }
+        // After the second time changing the playlist, apply shuffle on the new
+        // playlist and skip the first song which will allways be the same
+        else if(skip) {
+            console.log("Skip");
+            player.setShuffle(true);
+            player.setLoop(true);
+            player.nextVideo();
+            
+            // Set the opacity to 1 for the first time
+            document.getElementById('player').style.opacity = 1;
+            skip = false;
+        }
     }
     else if (event.data === YT.PlayerState.PLAYING) {
         // Increase the volume back to the original
@@ -73,7 +92,7 @@ async function onPlayerStateChange(event) {
         lock = false;
     }
     // Unlock when a video has paused
-    else if (event.data === YT.PlayerState.PAUSED) {
+    else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.UNSTARTED) {
         lock = false;
     }
 }
@@ -140,6 +159,7 @@ async function changeVideo(button) {
             // skip the first video. This is to get shuffling working without
             // always playing the same video first
             skip = true;
+            rechangePlaylist = true;
             await player.loadPlaylist({
                 listType: 'playlist',
                 list: button.getAttribute('playlistid'),
@@ -160,6 +180,7 @@ async function changeVideo(button) {
 
             button.classList.remove('pre-active');
             button.setAttribute('state', 'false');
+            lock = false;
         }
     }
     else {
@@ -173,15 +194,17 @@ function setupMenu(settings) {
 
     // For each instance in the playlist, create a button
     settings.playlists.forEach(element => {
-        button = document.createElement('button');
-        button.innerHTML = element.title;
-        button.setAttribute('playlistid', element.id);
-        button.setAttribute('title', element.title);
-        button.classList.add('button');
-        button.classList.add('playlist-button');
-        button.onclick = function () { changeVideo(this) }
-
-        el.appendChild(button);
+        if(element.title !== '' && element.id !== '') {
+            button = document.createElement('button');
+            button.innerHTML = element.title;
+            button.setAttribute('playlistid', element.id);
+            button.setAttribute('title', element.title);
+            button.classList.add('button');
+            button.classList.add('playlist-button');
+            button.onclick = function () { changeVideo(this) }
+            
+            el.appendChild(button);
+        }
     });
 
 }
