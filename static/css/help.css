@@ -1,0 +1,18 @@
+#help-menu p {
+    font-size: 1.75rem;
+}
+
+p img {
+    height: 1.2rem;
+}
+
+p button {
+    display: inline;
+    font-size: .8rem !important;
+    padding: .0 1rem !important;
+    margin-bottom: 0 !important;
+    line-height: inherit !important;
+    height: 2.2rem !important;
+
+    transform: translateY(-.2rem);
+}

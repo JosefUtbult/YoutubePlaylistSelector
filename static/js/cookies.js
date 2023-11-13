@@ -23,10 +23,25 @@ const TEMPLATE = {
 
 function log(message) {
     console.log(message);
+    let element = document.getElementById('log-window');
+    let child = document.createElement('p');
+    child.innerHTML = message;
+    element.appendChild(child);
+
+    setTimeout(() => {
+        child.style.opacity = 1;
+    }, 100);
+
+    setTimeout(() => {
+        setTimeout(() => {
+            element.removeChild(child);
+        }, 500);
+        child.style.opacity = 0;
+    }, 5000);
 }
 
 // Take a settings object and store it as a cookie
-function setSettings(settings) {
+function setSettings(settings, reload=false) {
     if(settings.version === undefined) {
         log("Version is not specified in settings");
         return
@@ -66,24 +81,22 @@ function setSettings(settings) {
 
     document.cookie = 'Settings='+ JSON.stringify(settings) +';expires='+now.toUTCString()+';path=/;SameSite=Strict'
 
-    log("Imported settings");
-
     setupMenu(settings);
     populateSettings(settings);
-    setLightDarkMode(settings.darkmode, 200);
+    if(reload) {
+        setLightDarkMode(settings.darkmode, 200);
+        log("Imported settings");
+    }
 }
 
 // Retrieve the settings cookie
 function getSettings() {
     try {
         const regex = /Settings=([^;]*)/gm;
-        return JSON.parse(regex.exec(document.cookie)[1])
+        return JSON.parse(regex.exec(document.cookie)[1]);
     } catch (error) {
         console.log("Unable to get settings from cookies. Using default")
-        return {
-            darkmode: false,
-            playlists: []
-        }
+        return TEMPLATE; 
     } 
 }
 
@@ -96,7 +109,7 @@ function importSettings() {
         reader.onload = function(e) {
             try {
                 settings = JSON.parse(e.target.result)
-                setSettings(settings);
+                setSettings(settings, true);
             } catch (error) {
                 log("Unable to parse JSON file")
                 return;

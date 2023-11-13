@@ -20,12 +20,12 @@ body:not(.instant) .playlist-button {
 }
 
 .light .pre-active:not(.active) {
-    background-color: var(--pre-active-light-background);
+    background-color: var(--light-pre-primary);
     color: var(--pre-active-light-text);
 }
 
 .light .active {
-    background-color: var(--active-light-background);
+    background-color: var(--light-primary);
     color: var(--active-light-text);
 }
 
@@ -35,12 +35,12 @@ body:not(.instant) .playlist-button {
 }
 
 .dark .pre-active:not(.active) {
-    background-color: var(--pre-active-dark-background);
+    background-color: var(--dark-pre-primary);
     color: var(--pre-active-dark-text);
 }
 
 .dark .active {
-    background-color: var(--active-dark-background);
+    background-color: var(--dark-primary);
     color: var(--active-dark-text);
 }
 

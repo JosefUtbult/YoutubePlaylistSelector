@@ -11,35 +11,26 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/youtubeplayer.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/switch.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/playlistbutton.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hiddenmenu.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/help.css') }}">
 
     <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <script src="{{ url_for('static', filename='js/player.js') }}"></script>
     <script src="{{ url_for('static', filename='js/cookies.js') }}"></script>
     <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
     <script src="{{ url_for('static', filename='js/setup.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/svg-inject.js') }}"></script>
 
-    <?php 
-    header('Access-Control-Allow-Origin: *');
-    header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-    header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-    header("Allow: GET, POST, OPTIONS, PUT, DELETE");
-    ?>
 </head>
 
 <body class="light instant">
-    <div id="settings-menu" style="opacity: 0; display: none;">
-    <!-- <div id="settings-menu"> -->
-        <button id="exit-button" onclick="closeSettings()">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192
-                210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0
-                45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5
-                45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3
-                0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
-            </svg>
+    <div id="settings-menu" class="hidden-menu" style="opacity: 0; display: none;">
+        <!-- <div id="settings-menu"> -->
+        <button class="exit-button" onclick="closeSettings()">
+            <img src="{{ url_for('static', filename='svg/xmark-solid.svg') }}" onload="SVGInject(this)">
         </button>
+        <div id="log-window"></div>
         <div class="container">
             <div class="row">
                 <h4>Settings</h4>
@@ -47,45 +38,112 @@
                     <div id="playlists-form">
                     </div>
                     <div class="row">
-                        <div class="two columns">
+                        <div class="two columns add-button-container">
                             <button id="add-button" onclick="addField()">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                    <path
-                                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-                                </svg>
+                                <img src="{{ url_for('static', filename='svg/plus-solid.svg') }}"
+                                    onload="SVGInject(this)">
                             </button>
                         </div>
+                        <div class="ten columns" style="height: 1px"></div>
                     </div>
                     <hr>
                     <div class="row">
-                        <label for="apply-settings" class="button settings-button">
+                        <label for="apply-settings" class="button settings-button button-primary">
                             Apply settings
                             <input type="submit" id="apply-settings" onclick="applySettings()">
                         </label>
                     </div>
-                    <div class="row">
-                        <a id="hiddenDownload" style="display: none;"></a>
-                        <div class="four columns">
-                            <label for="export-settings" class="button settings-button">
-                                Export Settings
-                                <input type="button" id="export-settings" onclick="exportSettings()">
-                            </label>
-                        </div>
-                        <div class="four columns">
-                            <label for="download-template" class="button settings-button">
-                                Download Template
-                                <input type="button" id="download-template" onclick="downloadTemplate()">
-                            </label>
-                        </div>
-                        <div class="four columns">
-                            <label for="settings-input" class="button settings-button">
-                                Import settings
-                                <input type="file" id="settings-input" name="settings" onchange="importSettings()"></input>
-                            </label>
-                        </div>
-                    </div>
                 </form>
+                <div class="row">
+                    <div class="four columns">
+                        <label for="export-settings" class="button settings-button">
+                            Export Settings
+                            <button class="button" id="export-settings" onclick="exportSettings()">
+                        </label>
+                    </div>
+                    <div class="four columns">
+                        <label for="download-template" class="button settings-button">
+                            Download Template
+                            <button class="button" id="download-template" onclick="downloadTemplate()">
+                        </label>
+                    </div>
+                    <div class="four columns">
+                        <label for="settings-input" class="button settings-button">
+                            Import settings
+                            <input type="file" id="settings-input" name="settings" onchange="importSettings()"></input>
+                        </label>
+                    </div>
+                    <a id="hiddenDownload" style="display: none;"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="help-menu" class="hidden-menu" style="opacity: 0; display: none;">
+    <!-- <div id="help-menu" class="hidden-menu"> -->
+        <button class="exit-button" onclick="closeHelp()">
+            <img src="{{ url_for('static', filename='svg/xmark-solid.svg') }}" onload="SVGInject(this)">
+        </button>
+        <div class="container">
+            <div class="row">
+                <h4>Welcome</h4>
+            </div>
+            <div class="row">
+                <p>
+                    The <i>Youtube Playlist Selector</i> is a tool for
+                    seamlessly switching between background music playing in
+                    Youtube. It's mainly intended for playing background music
+                    during roleplaying games, but can be used however you wish.
+                </p>
+                <p>
+                    To setup a list of playlists, go to <button class="button">Settings</button>. In
+                    there you add a new playlist using the plus (
+                    <img src="{{ url_for('static', filename='svg/plus-solid.svg') }}">
+                    ) button. In the empty field that appears you can then give
+                    the button a title and paste in either the youtube URL or
+                    playlist ID. To remove a playlist, use the trashcan (
+                    <img src="{{ url_for('static', filename='svg/trash-can-regular.svg') }}">
+                    ) button next to it. When you have changed either the title
+                    or the playlist ID/URL you can apply the changes by pressing
+                    <button class="button button-primary">Apply Settings</button>.
+                </p>
+            </div>
+            <div class="row">
+                <h5>Importing and Exporting settings</h5>
+                <p>
+                    When you have created a list of playlists, you can export
+                    this list by pressing the <button class="button">Export
+                    Settings</button> button. These settings are then downloaded
+                    to your computer as a JSON file. If you then want to use
+                    these settings again, press the <button
+                    class="button">Import Settings</button> button and select
+                    your downloaded file.
+                </p>
+                <p>
+                    If you want to setup your playlists manually, you can
+                    download a template by pressing the <button
+                    class="button">Download Template</button> button. You can
+                    then edit this template using a file editor and import them
+                    to the site. In the left hand side of the settings menu you
+                    will get a notification showing whether the import succeeded
+                    or failed if something in the file isn't set up correct.
+                </p>
+                <p>
+                    Note that these settings are stored locally in your browser
+                    as a cookie. <b>They are never saved by the server.</b>
+                </p>
+            </div>
+            <div class="row">
+                <h5>Finding the playlist URL</h5>
+                <p>
+                    You can find the URL of the youtube playlist by going to
+                    Youtube and starting a playlist. Then simply copy the whole
+                    URL from the searchbar and paste it into the field in
+                    settings.
+                </p>
+                <p>
+                    Note that a playlist must be either public or
+                    unlisted in order for this application to work.
+                </p>
             </div>
         </div>
     </div>
@@ -98,10 +156,11 @@
                 <input type="checkbox" id="theme-switch" onclick="toggleLightDarkMode(this)">
                 <span class="slider"></span>
             </label>
+            <button class="button" onclick="openHelp()">Help</button>
             <button class="button" onclick="openSettings()">Settings</button>
         </div>
     </div>
-    <div class="content-container" onclick="closeSettings()">
+    <div class="content-container" onclick="closeSettings(); closeHelp()">
         <div id="selectionButtons" class="container row button-container center"></div>
         <div class="row">
             <div class="footer">
@@ -113,6 +172,9 @@
             </div>
         </div>
     </div>
+    <img id="trashcan-icon" src="{{ url_for('static', filename='svg/trash-can-regular.svg') }}" onload="SVGInject(this)"
+        style="display: none">
+
 </body>
 
 </html>

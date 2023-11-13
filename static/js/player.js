@@ -92,7 +92,7 @@ async function onPlayerStateChange(event) {
         lock = false;
     }
     // Unlock when a video has paused
-    else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.UNSTARTED) {
+    else if (event.data === YT.PlayerState.PAUSED) {
         lock = false;
     }
 }

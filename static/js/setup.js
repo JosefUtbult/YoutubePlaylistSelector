@@ -10,4 +10,5 @@ window.onload = () => {
     applyTransition();
     setupPlayer(settings);
     populateSettings(settings);
+    applyEnter();
 }

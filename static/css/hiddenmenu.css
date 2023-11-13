@@ -1,0 +1,73 @@
+:root {
+    --hidden-menu-padding-x: 10vw;
+    --hidden-menu-padding-y: 10vh;
+}
+
+.hidden-menu {
+    position: absolute;
+    top: var(--hidden-menu-padding-y);
+    bottom: var(--hidden-menu-padding-y);
+    left: var(--hidden-menu-padding-x);
+    right: var(--hidden-menu-padding-x);
+    z-index: 2;
+    border-radius: 10px;
+    box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2), 0 9px 22px 0 rgba(0, 0, 0, 0.19);
+    display: inline-block;
+    padding: 2vh var(--hidden-menu-padding-x);
+    overflow-y: scroll;
+}
+
+body:not(.instant) .hidden-menu {
+    transition: opacity ease-in-out 200ms,
+        background-color var(--color-transition),
+        color var(--color-transition);
+}
+
+.hidden-menu > * {
+    position: relative;
+}
+
+.hidden-menu h1,
+.hidden-menu h2,
+.hidden-menu h3,
+.hidden-menu h4,
+.hidden-menu h5,
+.hidden-menu h6 {
+    text-align: center;
+}
+
+.light .hidden-menu {
+    background-color: var(--background-light);
+    border-color: var(--text-light);
+}
+
+.dark .hidden-menu {
+    background-color: var(--background-dark);
+    border-color: var(--text-dark);
+}
+
+.hidden-menu .row {
+    margin-top: 2vh;
+}
+
+.exit-button {
+    position: fixed;
+    right: calc(var(--hidden-menu-padding-x) + 2vw);
+    width: 14px;
+    height: 21px;
+    padding: 0;
+    border: none;
+}
+
+.exit-button svg {
+    width: 100%;
+    height: 100%;
+}
+
+.light .exit-button svg {
+    color: var(--text-light);
+}
+
+.dark .exit-button svg {
+    color: var(--text-dark);
+}

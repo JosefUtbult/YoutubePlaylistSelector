@@ -1,7 +1,7 @@
 :root {
     --text-light: #000000;
     --background-light: #FFFFFF;
-    --active-light-background: #33C3F0;
+    --light-primary: #33C3F0;
     --pre-active-light-background: #a6ceda6b;
     --off-light-background: rgba(231, 231, 231, 0.288);
     --active-light-text: #FFFFFF;
@@ -10,7 +10,7 @@
 
     --text-dark: #FFFFFF;
     --background-dark: #2B2B2B;
-    --active-dark-background: #f3b252;
+    --dark-primary: #f3b252;
     --pre-active-dark-background: #f1c889;
     --off-dark-background: #353535;
     --active-dark-text: rgb(41, 41, 41);
