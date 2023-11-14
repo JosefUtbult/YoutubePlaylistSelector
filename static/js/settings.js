@@ -17,6 +17,7 @@ function closeSettings() {
 }
 
 function openSettings() {
+    closeHelp();
     openHidden(document.getElementById('settings-menu'));
 }
 
@@ -25,6 +26,7 @@ function closeHelp() {
 }
 
 function openHelp() {
+    closeSettings();
     openHidden(document.getElementById('help-menu'));
 }
 

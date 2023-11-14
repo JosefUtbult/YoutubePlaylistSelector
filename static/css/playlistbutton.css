@@ -6,44 +6,26 @@
     margin-right: 0.4vw;
     margin-left: 0.4vw;
     opacity: 0.9;
+
+    font-family: 'JetbrainsMono';
 }
 
-body:not(.instant) .playlist-button {
-    transition: opacity 100ms ease-in-out,
-        background-color var(--color-transition),
-        color var(--color-transition);
+.playlist-button:not(.pre-active):not(.button-primary) {
+    background-color: inherit;
+    color: inherit;
 }
 
-.light .playlist-button:not(.pre-active):not(.active) {
-    background-color: var(--off-light-background);
-    color: var(--off-light-text);
+.skeleton-blue .pre-active:not(.button-primary) {
+    background-color: var(--pre-active);
+    color: var(--pre-active-text);
 }
 
-.light .pre-active:not(.active) {
-    background-color: var(--light-pre-primary);
-    color: var(--pre-active-light-text);
+.soothing-orange .playlist-button:not(.pre-active):not(.button-primary) {
+    background-color: var(--off-background);
+    color: var(--off-text);
 }
 
-.light .active {
-    background-color: var(--light-primary);
-    color: var(--active-light-text);
-}
-
-.dark .playlist-button:not(.pre-active):not(.active) {
-    background-color: var(--off-dark-background);
-    color: var(--off-dark-text);
-}
-
-.dark .pre-active:not(.active) {
-    background-color: var(--dark-pre-primary);
-    color: var(--pre-active-dark-text);
-}
-
-.dark .active {
-    background-color: var(--dark-primary);
-    color: var(--active-dark-text);
-}
-
-.playlist-button:hover {
-    opacity: 1;
+.soothing-orange .pre-active:not(.button-primary) {
+    background-color: var(--pre-active);
+    color: var(--pre-active-text);
 }

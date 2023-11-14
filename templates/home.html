@@ -6,8 +6,11 @@
     <meta name="viewport">
     <title>Youtube Playlist Selector</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/skeleton.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/themes/skeleton-blue.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/themes/soothing-orange.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/youtubeplayer.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/switch.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/playlistbutton.css') }}">
@@ -24,7 +27,7 @@
 
 </head>
 
-<body class="light instant">
+<body class="skeleton-blue instant">
     <div id="settings-menu" class="hidden-menu" style="opacity: 0; display: none;">
         <!-- <div id="settings-menu"> -->
         <button class="exit-button" onclick="closeSettings()">
@@ -34,6 +37,8 @@
         <div class="container">
             <div class="row">
                 <h4>Settings</h4>
+            </div>
+            <div class="row">
                 <form onsubmit="return false">
                     <div id="playlists-form">
                     </div>
@@ -54,27 +59,27 @@
                         </label>
                     </div>
                 </form>
-                <div class="row">
-                    <div class="four columns">
-                        <label for="export-settings" class="button settings-button">
-                            Export Settings
-                            <button class="button" id="export-settings" onclick="exportSettings()">
-                        </label>
-                    </div>
-                    <div class="four columns">
-                        <label for="download-template" class="button settings-button">
-                            Download Template
-                            <button class="button" id="download-template" onclick="downloadTemplate()">
-                        </label>
-                    </div>
-                    <div class="four columns">
-                        <label for="settings-input" class="button settings-button">
-                            Import settings
-                            <input type="file" id="settings-input" name="settings" onchange="importSettings()"></input>
-                        </label>
-                    </div>
-                    <a id="hiddenDownload" style="display: none;"></a>
+            </div>
+            <div class="row">
+                <div class="four columns">
+                    <label for="export-settings" class="button settings-button">
+                        Export Settings
+                        <button class="button" id="export-settings" onclick="exportSettings()">
+                    </label>
                 </div>
+                <div class="four columns">
+                    <label for="download-template" class="button settings-button">
+                        Download Template
+                        <button class="button" id="download-template" onclick="downloadTemplate()">
+                    </label>
+                </div>
+                <div class="four columns">
+                    <label for="settings-input" class="button settings-button">
+                        Import settings
+                        <input type="file" id="settings-input" name="settings" onchange="importSettings()"></input>
+                    </label>
+                </div>
+                <a id="hiddenDownload" style="display: none;"></a>
             </div>
         </div>
     </div>
@@ -97,11 +102,11 @@
                 <p>
                     To setup a list of playlists, go to <button class="button">Settings</button>. In
                     there you add a new playlist using the plus (
-                    <img src="{{ url_for('static', filename='svg/plus-solid.svg') }}">
+                    <img src="{{ url_for('static', filename='svg/plus-solid.svg') }}" onload="SVGInject(this)">
                     ) button. In the empty field that appears you can then give
                     the button a title and paste in either the youtube URL or
                     playlist ID. To remove a playlist, use the trashcan (
-                    <img src="{{ url_for('static', filename='svg/trash-can-regular.svg') }}">
+                    <img src="{{ url_for('static', filename='svg/trash-can-regular.svg') }}" onload="SVGInject(this)">
                     ) button next to it. When you have changed either the title
                     or the playlist ID/URL you can apply the changes by pressing
                     <button class="button button-primary">Apply Settings</button>.
@@ -148,19 +153,22 @@
         </div>
     </div>
     <div class="flexbox-spread header">
-        <div>
+        <div class="lefthand-title">
             <h1>Youtube Playlist Selector</h1>
         </div>
         <div class="right-menu">
+            <button class="button" onclick="openSettings()">Settings</button>
+            <button class="button" onclick="openHelp()">Help</button>
             <label class="switch">
                 <input type="checkbox" id="theme-switch" onclick="toggleLightDarkMode(this)">
                 <span class="slider"></span>
             </label>
-            <button class="button" onclick="openHelp()">Help</button>
-            <button class="button" onclick="openSettings()">Settings</button>
         </div>
     </div>
     <div class="content-container" onclick="closeSettings(); closeHelp()">
+        <div class="center-title center">
+            <h1>Youtube Playlist Selector</h1>
+        </div>
         <div id="selectionButtons" class="container row button-container center"></div>
         <div class="row">
             <div class="footer">

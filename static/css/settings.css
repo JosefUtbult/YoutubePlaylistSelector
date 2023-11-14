@@ -13,12 +13,12 @@ body:not(.instant) .exit-button path {
     transition: fill var(--color-transition);
 }
 
-.light .exit-button path {
-    fill: var(--text-light)
+.skeleton-blue .exit-button path {
+    fill: var(--text)
 }
 
-.dark .exit-button path {
-    fill: var(--text-dark)
+.soothing-orange .exit-button path {
+    fill: var(--text)
 }
 
 #settings-menu form .row {
@@ -43,14 +43,14 @@ body:not(.instant) .exit-button path {
     height: 100%;
 }
 
-.light .trash-button path,
-.light #add-button path {
-    color: var(--text-light);
+.skeleton-blue .trash-button path,
+.skeleton-blue #add-button path {
+    color: var(--text);
 }
 
-.dark .trash-button path,
-.dark #add-button path {
-    color: var(--text-dark);
+.soothing-orange .trash-button path,
+.soothing-orange #add-button path {
+    color: var(--text);
 }
 
 .trash-button path,
@@ -62,12 +62,12 @@ body:not(.instant) .exit-button path {
     color: red;
 }
 
-.light #add-button:hover path {
-    color: var(--light-primary)
+.skeleton-blue #add-button:hover path {
+    color: var(--primary)
 }
 
-.dark #add-button:hover path {
-    color: var(--dark-primary)
+.soothing-orange #add-button:hover path {
+    color: var(--primary)
 }
 
 .settings-button {

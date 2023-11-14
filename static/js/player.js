@@ -87,7 +87,7 @@ async function onPlayerStateChange(event) {
         // Increase the volume back to the original
         await increaseVolume();
         if(storedButton) {
-            storedButton.classList.add('active');
+            storedButton.classList.add('button-primary');
         }
         lock = false;
     }
@@ -141,7 +141,7 @@ async function changeVideo(button) {
         if(button.getAttribute('state') != 'true') {
 
             Array.from(document.getElementsByClassName('playlist-button')).forEach(element => {
-                element.classList.remove('active');
+                element.classList.remove('button-primary');
                 element.classList.remove('pre-active');
                 element.setAttribute('state', 'false');
             })
@@ -171,7 +171,7 @@ async function changeVideo(button) {
             storedButton = button;
         }
         else {
-            button.classList.remove('active');
+            button.classList.remove('button-primary');
 
             // Decrease the volume gradually
             await decreaseVolume(originalVolume);

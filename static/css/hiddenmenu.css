@@ -36,14 +36,14 @@ body:not(.instant) .hidden-menu {
     text-align: center;
 }
 
-.light .hidden-menu {
-    background-color: var(--background-light);
-    border-color: var(--text-light);
+.skeleton-blue .hidden-menu {
+    background-color: var(--background);
+    border-color: var(--text);
 }
 
-.dark .hidden-menu {
-    background-color: var(--background-dark);
-    border-color: var(--text-dark);
+.soothing-orange .hidden-menu {
+    background-color: var(--background);
+    border-color: var(--text);
 }
 
 .hidden-menu .row {
@@ -64,10 +64,10 @@ body:not(.instant) .hidden-menu {
     height: 100%;
 }
 
-.light .exit-button svg {
-    color: var(--text-light);
+.skeleton-blue .exit-button svg {
+    color: var(--text);
 }
 
-.dark .exit-button svg {
-    color: var(--text-dark);
+.soothing-orange .exit-button svg {
+    color: var(--text);
 }

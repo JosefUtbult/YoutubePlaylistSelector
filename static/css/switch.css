@@ -18,7 +18,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--light-primary);
+    background-color: var(--primary);
     border-radius: 34px;
 }
 
@@ -44,11 +44,11 @@ body:not(.instant) .slider:before {
 }
 
 input:checked+.slider {
-    background-color: var(--dark-primary);
+    background-color: var(--primary);
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px var(--dark-primary);
+    box-shadow: 0 0 1px var(--primary);
 
 }
 

@@ -6,7 +6,7 @@ import('./settings.js');
 window.onload = () => {
     settings = getSettings();
 
-    setLightDarkMode(settings.darkmode);
+    setLightDarkMode(settings);
     applyTransition();
     setupPlayer(settings);
     populateSettings(settings);

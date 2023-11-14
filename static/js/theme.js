@@ -2,12 +2,12 @@
 function toggleLightDarkMode(button) {
     body = document.body
     if(button.checked){
-        body.classList.remove('light')
-        body.classList.add('dark')
+    body.classList.remove('skeleton-blue')
+        body.classList.add('soothing-orange')
     }
     else {
-        body.classList.remove('dark')
-        body.classList.add('light')
+        body.classList.remove('soothing-orange')
+        body.classList.add('skeleton-blue')
     }
 }
 
@@ -20,13 +20,13 @@ async function setLightDarkMode(darkmode, delay) {
     body = document.body;
     button = document.getElementById("theme-switch");
     if(darkmode){
-        body.classList.remove('light');
-        body.classList.add('dark');
+        body.classList.remove('skeleton-blue');
+        body.classList.add('soothing-orange');
         button.checked = true;
     }
     else {
-        body.classList.remove('dark');
-        body.classList.add('light');
+        body.classList.remove('soothing-orange');
+        body.classList.add('skeleton-blue');
         button.checked = false;
     }
 }
