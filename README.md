@@ -14,3 +14,4 @@ unlisted playlists from Youtube.
 
 - [ ] Add sections in the header for changing between different button
   configurations.
+- [ ] Fix locked state when an unavailable video is played
