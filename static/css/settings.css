@@ -27,10 +27,14 @@ body:not(.instant) .exit-button path {
 }
 
 .trash-button-container,
-.add-button-container {
+.add-button-container > div {
     display: flex;
     flex-direction: column;
     align-items: end;
+}
+
+.trash-button-container {
+    margin-left: 0;
 }
 
 .trash-button,
@@ -77,4 +81,62 @@ body:not(.instant) .exit-button path {
 .settings-button > button,
 .settings-button > input {
     display: none;
+}
+
+#playlists-form hr {
+    display: none;
+    width: 100%;
+}
+
+@media (max-width: 1300px) {
+
+	.settings-button-container .columns {
+		width: 100%;
+		margin-left: 0;
+	}
+
+    #playlists-form .row {
+        flex-direction: column-reverse;
+        align-items: flex-start !important;
+    }
+
+    #playlists-form .columns {
+        width: 100%;
+        margin-top: 2vh;
+        margin-left: 0;
+    }
+
+    #playlists-form input {
+        width: 100%;
+    }
+
+    .trash-button-container,
+    .add-button-container {
+        align-items: center;
+    }
+
+    .add-button-container {
+        width: 100% !important;
+    }
+
+    .add-button-container > div {
+        align-items: center;
+    }
+
+    .add-button-container > .two {
+        width: 100% !important;
+    }
+
+    .add-button-container > .ten {
+        width: 0 !important;
+        margin-left: 0;
+    }
+    .add-button {
+        width: 100% !important;
+    }
+
+    #playlists-form hr {
+        display: block;
+    }
+
 }

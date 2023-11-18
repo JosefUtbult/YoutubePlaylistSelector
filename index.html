@@ -18,12 +18,34 @@
     <link rel="stylesheet" href="static/css/settings.css">
     <link rel="stylesheet" href="static/css/help.css">
 
+<<<<<<< HEAD:index.html
     <script src="static/js/cookies.js"></script>
     <script src="static/js/player.js"></script>
     <script src="static/js/settings.js"></script>
     <script src="static/js/svg-inject.js"></script>
     <script src="static/js/theme.js"></script>
     <script src="static/js/setup.js"></script>
+=======
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/skeleton.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/themes/skeleton-blue.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton/css/themes/soothing-orange.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/youtubeplayer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/switch.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/playlistbutton.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hiddenmenu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/help.css') }}">
+
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/player.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cookies.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/hidden.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/setup.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/svg-inject.js') }}"></script>
+>>>>>>> dbb024c (Fix minor issues):templates/home.html
 
 </head>
 
@@ -42,8 +64,8 @@
                 <form onsubmit="return false">
                     <div id="playlists-form">
                     </div>
-                    <div class="row">
-                        <div class="two columns add-button-container">
+                    <div class="row  add-button-container">
+                        <div class="two columns">
                             <button id="add-button" onclick="addField()">
                                 <img src="static/svg/plus-solid.svg"
                                     onload="SVGInject(this)">
@@ -60,7 +82,7 @@
                     </div>
                 </form>
             </div>
-            <div class="row">
+            <div class="row settings-button-container">
                 <div class="four columns">
                     <label for="export-settings" class="button settings-button">
                         Export Settings

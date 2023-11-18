@@ -1,35 +1,3 @@
-function closeHidden(element) {
-    element.style.opacity = 0;
-    setTimeout(() => {
-        element.style.display = 'none';
-    }, 200);
-}
-
-function openHidden(element) {
-    element.style.display = 'block';
-    setTimeout(() => {
-        element.style.opacity = 1;
-    }, 50);
-}
-
-function closeSettings() {
-    closeHidden(document.getElementById('settings-menu'));
-}
-
-function openSettings() {
-    closeHelp();
-    openHidden(document.getElementById('settings-menu'));
-}
-
-function closeHelp() {
-    closeHidden(document.getElementById('help-menu'));
-}
-
-function openHelp() {
-    closeSettings();
-    openHidden(document.getElementById('help-menu'));
-}
-
 function setupTrashButton(index) {
     let trashContainer = document.createElement('div');
     trashContainer.classList.add('two')
@@ -93,6 +61,10 @@ function setupIdField(index, id) {
     return idContainer;
 }
 
+function setupHr() {
+    return document.createElement('hr');
+}
+
 function populateSettings(settings) {
     let playlists = settings.playlists;
     parentElement = document.getElementById('playlists-form');
@@ -104,6 +76,7 @@ function populateSettings(settings) {
         let container = document.createElement('div');
         container.classList.add('row');
         
+        container.appendChild(setupHr());
         container.appendChild(setupTrashButton(index));
         container.appendChild(setupTitleField(index, element.title));
         container.appendChild(setupIdField(index, element.id));
@@ -140,8 +113,8 @@ function applySettings() {
 
     parentElement = document.getElementById('playlists-form');
     parentElement.childNodes.forEach(element => {
-        let title = element.childNodes[1].childNodes[1].value;
-        let raw_id = element.childNodes[2].childNodes[1].value;
+        let title = element.childNodes[2].childNodes[1].value;
+        let raw_id = element.childNodes[3].childNodes[1].value;
         let id;
 
         if ((res = regex.exec(raw_id)) !== null) {
