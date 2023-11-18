@@ -134,7 +134,14 @@ async function changeVideo(button) {
         console.log("Changing video")
 
         lock = true;
-        let originalVolume = player.getVolume();
+        let originalVolume
+        try {
+            originalVolume = player.getVolume();
+        } catch {
+            console.log("Unable to get player correctly. Probably still loading");
+            lock = false;
+            return
+        }
         console.log(`Original volume: ${originalVolume}`);
 
         // Change playlist if playing. Otherwise, pause
