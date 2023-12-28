@@ -137,6 +137,15 @@ body {
 }
 
 @media (pointer:none), (pointer:coarse) {
+    h4 {
+        font-size: 70px;
+    }
+
+    .exit-button {
+        height: 63px !important;
+        width: 110px !important;
+    }
+
     .hidden-menu {
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -157,9 +166,9 @@ body {
     }
 
     .button {
-        height: 50px;
-        font-size: 19px;
-        line-height: 50px;
+        height: 90px;
+        font-size: 32px;
+        line-height: 90px;
     }
 
     .lefthand-title {
@@ -167,18 +176,36 @@ body {
     }
 
     .switch {
-        height: 50px !important;
-        width: 85px !important;
+        height: 90px !important;
+        width: 150px !important;
+    }
+
+    .slider {
+        border-radius: 45px !important;
     }
 
     .slider::before {
-        height: 42px !important;
-        width: 42px !important;
+        height: 81px !important;
+        width: 81px !important;
     }
 
     input:checked + .slider::before {
-        -webkit-transform: translateX(35px) !important;
-        -ms-transform: translateX(35px) !important;
-        transform: translateX(35px) !important;
+        -webkit-transform: translateX(60px) !important;
+        -ms-transform: translateX(60px) !important;
+        transform: translateX(60px) !important;
+    }
+
+    label {
+        font-size: 32px;
+    }
+
+    input[type="text"] {
+        height: 87px;
+        font-size: 32px;
+    }
+
+    .trash-button,
+    #add-button {
+        height: 80px;
     }
 }
