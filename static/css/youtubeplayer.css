@@ -135,3 +135,50 @@ body {
         width: 100%;
     }
 }
+
+@media (pointer:none), (pointer:coarse) {
+    .hidden-menu {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .container {
+        width: 95%;
+    }
+
+    *:not(#playlists-form) > .row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .four.columns {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .button {
+        height: 50px;
+        font-size: 19px;
+        line-height: 50px;
+    }
+
+    .lefthand-title {
+        font-size: 22px;
+    }
+
+    .switch {
+        height: 50px !important;
+        width: 85px !important;
+    }
+
+    .slider::before {
+        height: 42px !important;
+        width: 42px !important;
+    }
+
+    input:checked + .slider::before {
+        -webkit-transform: translateX(35px) !important;
+        -ms-transform: translateX(35px) !important;
+        transform: translateX(35px) !important;
+    }
+}
