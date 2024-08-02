@@ -8,6 +8,7 @@ window.onload = () => {
 
     setLightDarkMode(settings);
     applyTransition();
+
     setupPlayer(settings);
     populateSettings(settings);
     applyEnter();

@@ -1,0 +1,28 @@
+{
+    "version": "1.1",
+    "darkmode": true,
+    "category": [{
+        "name": "Dummy Category",
+        "project": [{
+            "name": "Dummy Project",
+            "playlists": [
+                {
+                    "title": "Mystery",
+                    "id": "PLuu9kZA0CNfMqrEvFuHxcnGJWEW8EN5Hm"
+                },
+                {
+                    "title": "Horror",
+                    "id": "PLuu9kZA0CNfPjXkT4BWCSV2tKJOhhe2oS"
+                },
+                {
+                    "title": "Combat",
+                    "id": "PLuu9kZA0CNfOOLGLMJ7QENxcIqieP33sM"
+                },
+                {
+                    "title": "Christmas Jazz",
+                    "id": "RDCLAK5uy_mHkFNBTuR8DZUj61H5XY2onS7nRujVFx8"
+                }
+            ]
+        }]
+    }]
+}

@@ -199,8 +199,10 @@ function setupMenu(settings) {
     let el = document.getElementById("selectionButtons");
     el.innerHTML = '';
 
+    // TODO: Detect active project
+
     // For each instance in the playlist, create a button
-    settings.playlists.forEach(element => {
+    settings.category[0].project[0].playlists.forEach(element => {
         if(element.title !== '' && element.id !== '') {
             button = document.createElement('button');
             button.innerHTML = element.title;

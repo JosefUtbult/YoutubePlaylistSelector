@@ -9,134 +9,177 @@
     transition: opacity ease-in-out 500ms;
 }
 
-body:not(.instant) .exit-button path {
-    transition: fill var(--color-transition);
-}
-
-.skeleton-blue .exit-button path {
-    fill: var(--text)
-}
-
-.soothing-orange .exit-button path {
-    fill: var(--text)
-}
-
-#settings-menu form .row {
+#settings-menu #category-container {
     display: flex;
-    align-items: end;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
-.trash-button-container,
-.add-button-container > div {
+#settings-menu .category {
+    width: 14rem;
+    padding: 0 0.5vw;
+    margin-bottom: 0.5vh;
+}
+
+#settings-menu .category button {
     display: flex;
-    flex-direction: column;
-    align-items: end;
-}
-
-.trash-button-container {
-    margin-left: 0;
-}
-
-.trash-button,
-#add-button {
+    align-items: center;
+    justify-content: center;
     border: none;
 }
 
-.trash-button svg,
-#add-button svg {
-    height: 100%;
+#settings-menu .category button p {
+    width: calc(100% - 2rem);
+    text-align: center;
+    margin: 0;
 }
 
-.skeleton-blue .trash-button path,
-.skeleton-blue #add-button path {
+#settings-menu .category button svg {
+    margin: 0;
+    padding-left: 0.6rem;
+    width: 1.4rem;
     color: var(--text);
 }
 
-.soothing-orange .trash-button path,
-.soothing-orange #add-button path {
-    color: var(--text);
-}
+/* .category { */
+/*     border: solid 1px; */
+/*     padding: 0 2vw 2vh 2vw; */
+/*     border-radius: 10px; */
+/*     margin-bottom: 2vh; */
+/*     border-color: var(--background-highlight); */
+/* } */
 
-.trash-button path,
-#add-button path {
-    transition: color 100ms ease-in-out;
-}
+/* #settings-menu h4 { */
+/*     margin-bottom: 0; */
+/* } */
 
-.trash-button:hover path {
-    color: red;
-}
+/* #settings-menu form .row { */
+/*     display: flex; */
+/*     align-items: end; */
+/* } */
 
-.skeleton-blue #add-button:hover path {
-    color: var(--primary)
-}
+/* .trash-button-container, */
+/* .add-button-container > div { */
+/*     display: flex; */
+/*     flex-direction: column; */
+/*     align-items: end; */
+/* } */
 
-.soothing-orange #add-button:hover path {
-    color: var(--primary)
-}
+/* .add-button-container columns { */
+/*     width: 100%; */
+/* } */
 
-.settings-button {
-    width: 100%;
-}
+/* .add-playlist-button-container { */
+/*     display: flex; */
+/*     flex-direction: row; */
+/*     justify-content: end; */
+/* } */
 
-.settings-button > button,
-.settings-button > input {
-    display: none;
-}
+/* .add-category-button { */
+/*     width: 100%; */
+/* } */
 
-#playlists-form hr {
-    display: none;
-    width: 100%;
-}
+/* .add-project-button { */
+/*     width: 100%; */
+/* } */
 
-@media (max-width: 1300px) {
+/* .add-project-button > svg { */
+/*     width: 100%; */
+/* } */
 
-	.settings-button-container .columns {
-		width: 100%;
-		margin-left: 0;
-	}
+/* .trash-button-container { */
+/*     margin-left: 0; */
+/* } */
 
-    #playlists-form .row {
-        flex-direction: column-reverse;
-        align-items: flex-start !important;
-    }
+/* .trash-button, */
+/* .add-button { */
+/*     border: none; */
+/* } */
 
-    #playlists-form .columns {
-        width: 100%;
-        margin-top: 2vh;
-        margin-left: 0;
-    }
+/* .trash-button svg, */
+/* .add-button svg { */
+/*     height: 100%; */
+/* } */
 
-    #playlists-form input {
-        width: 100%;
-    }
+/* .trash-button path, */
+/* .add-button path { */
+/*     transition: color 100ms ease-in-out; */
+/*     color: var(--text); */
+/* } */
 
-    .trash-button-container,
-    .add-button-container {
-        align-items: center;
-    }
+/* .trash-button:hover path { */
+/*     color: red; */
+/* } */
 
-    .add-button-container {
-        width: 100% !important;
-    }
+/* .add-button:hover path { */
+/*     color: var(--primary) */
+/* } */
 
-    .add-button-container > div {
-        align-items: center;
-    }
+/* .settings-button { */
+/*     width: 100%; */
+/* } */
 
-    .add-button-container > .two {
-        width: 100% !important;
-    }
+/* .settings-button > button, */
+/* .settings-button > input { */
+/*     display: none; */
+/* } */
 
-    .add-button-container > .ten {
-        width: 0 !important;
-        margin-left: 0;
-    }
-    .add-button {
-        width: 100% !important;
-    }
+/* #playlists-form .hidden-hr { */
+/*     display: none; */
+/*     width: 100%; */
+/* } */
 
-    #playlists-form hr {
-        display: block;
-    }
+/* @media (max-width: 1300px) { */
 
-}
+/* 	.settings-button-container .columns { */
+/* 		width: 100%; */
+/* 		margin-left: 0; */
+/* 	} */
+
+/*     #playlists-form .row { */
+/*         flex-direction: column-reverse; */
+/*         align-items: flex-start !important; */
+/*     } */
+
+/*     #playlists-form .columns { */
+/*         width: 100%; */
+/*         margin-top: 2vh; */
+/*         margin-left: 0; */
+/*     } */
+
+/*     #playlists-form input { */
+/*         width: 100%; */
+/*     } */
+
+/*     .trash-button-container, */
+/*     .add-container { */
+/*         align-items: center; */
+/*     } */
+
+/*     .add-container { */
+/*         width: 100% !important; */
+/*     } */
+
+/*     .add-container > div { */
+/*         align-items: center; */
+/*     } */
+
+/*     .add-container > .two { */
+/*         width: 100% !important; */
+/*     } */
+
+/*     .add-container > .ten { */
+/*         width: 0 !important; */
+/*         margin-left: 0; */
+/*     } */
+/*     .add-button { */
+/*         width: 100% !important; */
+/*     } */
+
+/*     #playlists-form .hidden-hr { */
+/*         display: block; */
+/*     } */
+
+/* } */

@@ -30,10 +30,9 @@ body:not(.instant) .hidden-menu {
 .hidden-menu h1,
 .hidden-menu h2,
 .hidden-menu h3,
-.hidden-menu h4,
-.hidden-menu h5,
-.hidden-menu h6 {
+.hidden-menu h4 {
     text-align: center;
+    width: 100%;
 }
 
 .skeleton-blue .hidden-menu {
@@ -62,12 +61,14 @@ body:not(.instant) .hidden-menu {
 .exit-button svg {
     width: 100%;
     height: 100%;
-}
-
-.skeleton-blue .exit-button svg {
     color: var(--text);
 }
 
-.soothing-orange .exit-button svg {
-    color: var(--text);
+.exit-button path {
+    fill: var(--text)
 }
+
+body:not(.instant) .exit-button path {
+    transition: fill var(--color-transition);
+}
+
